@@ -1,5 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
+import {
+  PageTransitionProvider,
+  DiaphragmTransition,
+} from "./components/PageTransition";
 import Homepage from "./pages/movemountains-homepage";
 import Portfolio from "./pages/movemountains-portfolio";
 import About from "./pages/movemountains-about";
@@ -26,18 +33,48 @@ import Videography from "./pages/movemountains-videography";
 import Super8 from "./pages/movemountains-super8";
 import ContentCreation from "./pages/movemountains-content-creation";
 import LiveStreaming from "./pages/movemountains-livestreaming";
+import WeddingEditorial from "./pages/movemountains-wedding-editorial";
 
-function ScrollToTop() {
+function SmoothScroll() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const lenisRef = useRef(null);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
+    });
+    lenisRef.current = lenis;
+    window.__lenis = lenis;
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => {
+      lenis.destroy();
+      lenisRef.current = null;
+      if (window.__lenis === lenis) window.__lenis = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    lenisRef.current?.scrollTo(0, { immediate: true });
+  }, [pathname]);
+
   return null;
 }
 
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
+      <PageTransitionProvider>
+        <SmoothScroll />
+        <DiaphragmTransition />
+        <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/about" element={<About />} />
@@ -46,6 +83,8 @@ export default function App() {
         <Route path="/investment" element={<Investment />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/wedding/carey-luke" element={<WeddingDetail />} />
+        <Route path="/wedding/anthony-justine" element={<WeddingEditorial />} />
+        <Route path="/wedding/:slug" element={<WeddingEditorial />} />
         <Route path="/academy" element={<Academy />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
@@ -64,7 +103,9 @@ export default function App() {
         <Route path="/super8" element={<Super8 />} />
         <Route path="/content-creation" element={<ContentCreation />} />
         <Route path="/livestreaming" element={<LiveStreaming />} />
-      </Routes>
+        </Routes>
+        <Analytics />
+      </PageTransitionProvider>
     </BrowserRouter>
   );
 }

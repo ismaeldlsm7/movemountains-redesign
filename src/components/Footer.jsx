@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { DS, socialLinks } from "./designSystem";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import subscribeSuccess from "../assets/lotties/subscribe-success.json";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [theme, setTheme] = useState(() => (typeof document !== "undefined" ? document.documentElement.getAttribute("data-theme") || "dark" : "dark"));
+
+  const setMode = (mode) => {
+    document.documentElement.setAttribute("data-theme", mode);
+    localStorage.setItem("mm-theme", mode);
+    setTheme(mode);
+  };
 
   return (
     <footer style={{ background: DS.surface, borderTop: `1px solid ${DS.border}` }}>
@@ -22,6 +31,8 @@ export default function Footer() {
         @media (max-width: 600px) {
           .footer-bottom-bar { flex-direction: column !important; text-align: center !important; gap: 10px !important; }
         }
+        .footer-theme-toggle { display: none; }
+        @media (max-width: 900px) { .footer-theme-toggle { display: flex !important; } }
       `}</style>
       <div style={{ borderBottom: `1px solid ${DS.border}`, padding: "clamp(32px, 6vw, 48px) clamp(20px, 4vw, 32px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 24 }} className="newsletter-row">
@@ -31,14 +42,16 @@ export default function Footer() {
           </div>
           {subscribed ? (
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <span style={{ fontFamily: "'DM Sans'", fontSize: 20, color: DS.gold }}>✓</span>
+              <div style={{ width: 44, height: 44 }}>
+                <DotLottieReact data={subscribeSuccess} autoplay />
+              </div>
               <span style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.text }}>You're in. Welcome to the list.</span>
             </motion.div>
           ) : (
             <div style={{ display: "flex", gap: 0, maxWidth: 420, width: "100%" }}>
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com" style={{
                 flex: 1, padding: "14px 16px", fontFamily: "'DM Sans'", fontSize: 14, color: DS.text,
-                background: "rgba(30,30,30,0.6)", border: `1px solid ${DS.border}`, borderRight: "none", outline: "none", transition: "border-color 0.3s", minWidth: 0,
+                background: DS.surfaceAlt, border: `1px solid ${DS.border}`, borderRight: "none", outline: "none", transition: "border-color 0.3s", minWidth: 0,
               }} onFocus={(e) => e.target.style.borderColor = DS.gold} onBlur={(e) => e.target.style.borderColor = DS.border} />
               <button onClick={() => { if (email) setSubscribed(true); }} style={{
                 fontFamily: "'DM Sans'", fontSize: 12, fontWeight: 600, color: DS.bg, background: DS.gold,
@@ -102,6 +115,27 @@ export default function Footer() {
         <p style={{ fontFamily: "'DM Sans'", fontSize: 12, color: DS.textSec, lineHeight: 1.6, margin: 0, maxWidth: 1000, marginLeft: "auto", marginRight: "auto" }}>
           <span style={{ color: DS.gold, marginRight: 8 }}>◎</span>RI · MA · CT · NY · NJ · PA · MD · VA · NC · SC · FL · TX · CO<span style={{ color: DS.gold, fontStyle: "italic" }}> — and beyond. No travel restrictions.</span>
         </p>
+      </div>
+
+      {/* Mobile-only theme toggle */}
+      <div className="footer-theme-toggle" style={{ borderTop: `1px solid ${DS.border}`, padding: "20px clamp(16px, 4vw, 32px)", justifyContent: "center", alignItems: "center", gap: 12 }}>
+        <span style={{ fontFamily: "'DM Sans'", fontSize: 10, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.15em" }}>Theme</span>
+        <button onClick={() => setMode("dark")} aria-label="Dark mode" style={{
+          width: 40, height: 40, cursor: "pointer", background: "transparent",
+          border: `1px solid ${theme === "dark" ? DS.gold : DS.border}`,
+          color: theme === "dark" ? DS.gold : DS.textSec,
+          display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s",
+        }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+        </button>
+        <button onClick={() => setMode("light")} aria-label="Light mode" style={{
+          width: 40, height: 40, cursor: "pointer", background: "transparent",
+          border: `1px solid ${theme === "light" ? DS.gold : DS.border}`,
+          color: theme === "light" ? DS.gold : DS.textSec,
+          display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s",
+        }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" /></svg>
+        </button>
       </div>
 
       <div style={{ borderTop: `1px solid ${DS.border}`, padding: "20px clamp(16px, 4vw, 32px)" }}>

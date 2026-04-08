@@ -4,9 +4,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const DS = {
-  bg: "#0F0F0F", surface: "#1E1E1E", surfaceAlt: "#161616",
-  text: "#F5F0E8", textSec: "#8A8477", gold: "#C9A96E",
-  ember: "#E8572A", border: "#2A2A2A",
+  bg: "var(--mm-bg)", surface: "var(--mm-surface)", surfaceAlt: "var(--mm-surface-alt)",
+  text: "var(--mm-text)", textSec: "var(--mm-text-sec)", gold: "var(--mm-gold)",
+  ember: "var(--mm-ember)", border: "var(--mm-border)",
 };
 
 const fontLink = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap";
@@ -487,7 +487,7 @@ export default function AcademyPage() {
           </div>
         </motion.div>
 
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(15,15,15,0.25) 0%, rgba(15,15,15,0.1) 40%, rgba(15,15,15,0.8) 82%, #0F0F0F 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(15,15,15,0.25) 0%, rgba(15,15,15,0.1) 40%, rgba(15,15,15,0.8) 82%, var(--mm-bg) 100%)" }} />
 
         <motion.div style={{ opacity: heroOpacity, position: "absolute", bottom: "10%", left: 0, right: 0, padding: "0 32px" }}>
           <div style={{ maxWidth: 1000, margin: "0 auto" }}>

@@ -3,20 +3,23 @@ import { motion, useInView, useScroll, useTransform, AnimatePresence } from "fra
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CheckAvailabilityButton from "../components/CheckAvailabilityButton";
+import FeaturedWork from "../components/FeaturedWork";
 import { Link } from "react-router-dom";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import scrollArrow from "../assets/lotties/scroll-arrow.json";
 
 // ─── Design System (Phase 2) ───────────────────────────────────────
 const DS = {
   colors: {
-    bg: "#0F0F0F",
-    surface: "#1E1E1E",
-    surfaceAlt: "#161616",
-    text: "#F5F0E8",
-    textSec: "#8A8477",
-    gold: "#C9A96E",
-    goldHover: "#D4A853",
-    ember: "#E8572A",
-    border: "#2A2A2A",
+    bg: "var(--mm-bg)",
+    surface: "var(--mm-surface)",
+    surfaceAlt: "var(--mm-surface-alt)",
+    text: "var(--mm-text)",
+    textSec: "var(--mm-text-sec)",
+    gold: "var(--mm-gold)",
+    goldHover: "var(--mm-gold-hover)",
+    ember: "var(--mm-ember)",
+    border: "var(--mm-border)",
   },
 };
 
@@ -94,7 +97,7 @@ function Hero() {
       <motion.div style={{ scale: imgScale, position: "absolute", inset: 0 }}>
         <div style={{
           width: "100%", height: "100%",
-          background: `linear-gradient(135deg, #1a1410 0%, #2a1f18 30%, #1a1a1a 70%, #0f0f0f 100%)`,
+          background: `linear-gradient(135deg, var(--mm-surface) 0%, var(--mm-surface-alt) 30%, var(--mm-surface) 70%, var(--mm-bg) 100%)`,
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
           <div style={{ color: DS.colors.textSec, fontFamily: "'DM Sans'", fontSize: 14, opacity: 0.4, textTransform: "uppercase", letterSpacing: "0.2em" }}>
@@ -113,7 +116,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(42px, 7vw, 88px)", fontWeight: 700, color: DS.colors.text, lineHeight: 1, margin: 0, letterSpacing: "-0.02em" }}>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(42px, 7vw, 88px)", fontWeight: 700, color: "#F5F0E8", lineHeight: 1, margin: 0, letterSpacing: "-0.02em" }}>
             Making Moments
           </h1>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(42px, 7vw, 88px)", fontWeight: 700, color: DS.colors.gold, lineHeight: 1, margin: 0, letterSpacing: "-0.02em" }}>
@@ -132,13 +135,9 @@ function Hero() {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        style={{ position: "absolute", bottom: 24, left: "50%", transform: "translateX(-50%)" }}
-      >
-        <div style={{ width: 1, height: 40, background: `linear-gradient(to bottom, ${DS.colors.gold}, transparent)` }} />
-      </motion.div>
+      <div style={{ position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)", width: 60, height: 60 }}>
+        <DotLottieReact data={scrollArrow} loop autoplay />
+      </div>
     </div>
   );
 }
@@ -184,76 +183,7 @@ function ServicesStrip() {
   );
 }
 
-// ─── Featured Work ──────────────────────────────────────────────────
-
-function FeaturedWork() {
-  const weddings = [
-    { couple: "Carey & Luke", venue: "Rosecliff, Newport", season: "Summer 2025", area: "1 / 1 / 3 / 3" },
-    { couple: "Howard & Shreya", venue: "OceanCliff, Newport", season: "Fall 2025", area: "1 / 3 / 2 / 5" },
-    { couple: "Ken & Alicia", venue: "Castle Hill Inn", season: "Spring 2025", area: "2 / 3 / 3 / 4" },
-    { couple: "Joel & Corey", venue: "The Chanler, Newport", season: "Summer 2025", area: "2 / 4 / 3 / 5" },
-    { couple: "Tim & Katie", venue: "St. Mary's, Narragansett", season: "Fall 2025", area: "3 / 1 / 4 / 3" },
-    { couple: "Connor & Amanda", venue: "Beavertail, Jamestown", season: "Winter 2025", area: "3 / 3 / 4 / 5" },
-  ];
-
-  const tones = ["#2a1f18", "#1a1e22", "#22201a", "#1e1a22", "#201e1a", "#1a2220"];
-
-  return (
-    <div style={{ padding: "100px 0", maxWidth: 1400, margin: "0 auto", paddingLeft: 32, paddingRight: 32 }}>
-      <FadeIn>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48 }}>
-          <div>
-            <div style={{ fontFamily: "'DM Sans'", fontSize: 12, color: DS.colors.gold, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 12 }}>Selected Work</div>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 700, color: DS.colors.text, margin: 0 }}>
-              Love Stories We've Told
-            </h2>
-          </div>
-          <Link to="/portfolio" style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.colors.gold, textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", borderBottom: `1px solid ${DS.colors.gold}`, paddingBottom: 2 }}>
-            View All →
-          </Link>
-        </div>
-      </FadeIn>
-
-      <div className="bento-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridAutoRows: "220px", gap: 20 }}>
-        {weddings.map((w, i) => (
-          <FadeIn key={w.couple} delay={i * 0.1} className="bento-item" style={{ gridArea: w.area }}>
-            <div style={{ position: "relative", overflow: "hidden", cursor: "pointer", width: "100%", height: "100%" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.querySelector('.overlay').style.opacity = 1;
-                e.currentTarget.querySelector('.img').style.transform = "scale(1.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.querySelector('.overlay').style.opacity = 0;
-                e.currentTarget.querySelector('.img').style.transform = "scale(1)";
-              }}
-            >
-              <div className="img" style={{
-                width: "100%", height: "100%", background: tones[i],
-                display: "flex", alignItems: "center", justifyContent: "center",
-                transition: "transform 0.6s ease",
-              }}>
-                <span style={{ color: DS.colors.textSec, fontFamily: "'DM Sans'", fontSize: 12, opacity: 0.3, textTransform: "uppercase", letterSpacing: "0.15em" }}>
-                  [ Wedding Story ]
-                </span>
-              </div>
-
-              {/* Hover overlay */}
-              <div className="overlay" style={{
-                position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,15,15,0.9) 0%, transparent 60%)",
-                display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 24,
-                opacity: 0, transition: "opacity 0.4s ease",
-              }}>
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: DS.colors.text, fontWeight: 700 }}>{w.couple}</div>
-                <div style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.colors.textSec, marginTop: 4 }}>{w.venue}</div>
-                <div style={{ fontFamily: "'DM Sans'", fontSize: 12, color: DS.colors.gold, marginTop: 2, textTransform: "uppercase", letterSpacing: "0.1em" }}>{w.season}</div>
-              </div>
-            </div>
-          </FadeIn>
-        ))}
-      </div>
-    </div>
-  );
-}
+// ─── Featured Work moved to ../components/FeaturedWork ─────────────
 
 // ─── Brand Statement ────────────────────────────────────────────────
 
@@ -423,7 +353,7 @@ function CTABlock() {
   return (
     <div style={{
       position: "relative", padding: "120px 32px", overflow: "hidden",
-      background: `linear-gradient(135deg, #1a1410 0%, #201810 50%, #0f0f0f 100%)`,
+      background: "var(--mm-surface-alt)",
     }}>
       {/* Subtle grain texture */}
       <div style={{ position: "absolute", inset: 0, opacity: 0.03, backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />

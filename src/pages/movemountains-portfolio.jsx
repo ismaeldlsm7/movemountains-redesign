@@ -3,11 +3,14 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CheckAvailabilityButton from "../components/CheckAvailabilityButton";
+import { Link } from "react-router-dom";
+
+const slugify = (s) => s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 const DS = {
-  bg: "#0F0F0F", surface: "#1E1E1E", surfaceAlt: "#161616",
-  text: "#F5F0E8", textSec: "#8A8477", gold: "#C9A96E",
-  goldHover: "#D4A853", ember: "#E8572A", border: "#2A2A2A",
+  bg: "var(--mm-bg)", surface: "var(--mm-surface)", surfaceAlt: "var(--mm-surface-alt)",
+  text: "var(--mm-text)", textSec: "var(--mm-text-sec)", gold: "var(--mm-gold)",
+  goldHover: "var(--mm-gold-hover)", ember: "var(--mm-ember)", border: "var(--mm-border)",
 };
 
 const fontLink = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap";
@@ -276,26 +279,26 @@ function StoryDetail({ story, onClose }) {
 
 // ─── Portfolio Card ─────────────────────────────────────────────────
 
-function PortfolioCard({ story, index, onClick }) {
+function PortfolioCard({ story, index }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-30px" });
   const [hovered, setHovered] = useState(false);
+  const slug = slugify(story.couple);
 
-  // Alternate tall/wide cards for visual rhythm
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: (index % 3) * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-      onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        cursor: "pointer", position: "relative", overflow: "hidden",
-        aspectRatio: "4/5",
-      }}
+      style={{ aspectRatio: "4/5" }}
     >
+    <Link to={`/wedding/${slug}`} style={{
+      display: "block", width: "100%", height: "100%",
+      cursor: "pointer", position: "relative", overflow: "hidden", textDecoration: "none",
+    }}>
       {/* Image */}
       <motion.div animate={{ scale: hovered ? 1.04 : 1 }} transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         style={{ width: "100%", height: "100%", background: story.color, display: "flex", alignItems: "center", justifyContent: "center" }}
@@ -348,6 +351,7 @@ function PortfolioCard({ story, index, onClick }) {
       }}>
         {story.date}
       </div>
+    </Link>
     </motion.div>
   );
 }
@@ -463,7 +467,7 @@ export default function PortfolioPage() {
             style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}
           >
             {filtered.map((story, i) => (
-              <PortfolioCard key={story.id} story={story} index={i} onClick={() => setSelectedStory(story)} />
+              <PortfolioCard key={story.id} story={story} index={i} />
             ))}
           </motion.div>
         </AnimatePresence>

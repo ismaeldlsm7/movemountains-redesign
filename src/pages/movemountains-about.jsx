@@ -4,9 +4,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const DS = {
-  bg: "#0F0F0F", surface: "#1E1E1E", surfaceAlt: "#161616",
-  text: "#F5F0E8", textSec: "#8A8477", gold: "#C9A96E",
-  ember: "#E8572A", border: "#2A2A2A",
+  bg: "var(--mm-bg)", surface: "var(--mm-surface)", surfaceAlt: "var(--mm-surface-alt)",
+  text: "var(--mm-text)", textSec: "var(--mm-text-sec)", gold: "var(--mm-gold)",
+  ember: "var(--mm-ember)", border: "var(--mm-border)",
 };
 
 const fontLink = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap";
@@ -285,7 +285,7 @@ export default function AboutPage() {
         <motion.div style={{ scale: heroScale, position: "absolute", inset: 0 }}>
           <div style={{
             width: "100%", height: "100%",
-            background: "linear-gradient(160deg, #1e1a14 0%, #22201a 40%, #1a1a1a 70%, #0f0f0f 100%)",
+            background: "linear-gradient(160deg, var(--mm-surface) 0%, var(--mm-surface-alt) 40%, var(--mm-surface) 70%, var(--mm-bg) 100%)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <span style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, opacity: 0.3, textTransform: "uppercase", letterSpacing: "0.2em" }}>
@@ -294,7 +294,7 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(15,15,15,0.2) 0%, rgba(15,15,15,0.15) 40%, rgba(15,15,15,0.75) 80%, #0F0F0F 100%)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(15,15,15,0.2) 0%, rgba(15,15,15,0.15) 40%, rgba(15,15,15,0.75) 80%, var(--mm-bg) 100%)" }} />
 
         <motion.div style={{ opacity: heroOpacity, position: "absolute", bottom: "12%", left: 0, right: 0, padding: "0 32px" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
@@ -449,7 +449,7 @@ export default function AboutPage() {
       </div>
 
       {/* ── CTA ───────────────────────────────────────────────────── */}
-      <div style={{ padding: "100px 32px", textAlign: "center", background: `linear-gradient(160deg, #1a1410 0%, #1a1612 50%, ${DS.bg} 100%)` }}>
+      <div style={{ padding: "100px 32px", textAlign: "center", background: `linear-gradient(160deg, var(--mm-surface) 0%, var(--mm-surface-alt) 50%, ${DS.bg} 100%)` }}>
         <FadeIn>
           <div style={{ fontFamily: "'DM Sans'", fontSize: 12, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 16 }}>Ready?</div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(30px, 4.5vw, 52px)", fontWeight: 700, color: DS.text, lineHeight: 1.1, margin: "0 0 16px" }}>
@@ -466,7 +466,7 @@ export default function AboutPage() {
               onMouseEnter={(e) => e.target.style.background = "#ff6b3d"}
               onMouseLeave={(e) => e.target.style.background = DS.ember}
             >Get in Touch</a>
-            <a href="#" style={{
+            <a href="/contact" style={{
               fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600,
               border: `1px solid ${DS.gold}`, transition: "all 0.3s",
             }}

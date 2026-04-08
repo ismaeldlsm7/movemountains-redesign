@@ -1,0 +1,28 @@
+:root, :root[data-theme="dark"] {
+  --mm-bg: #0F0F0F;
+  --mm-surface: #1E1E1E;
+  --mm-surface-alt: #161616;
+  --mm-text: #F5F0E8;
+  --mm-text-sec: #8A8477;
+  --mm-gold: #C9A96E;
+  --mm-gold-hover: #D4A853;
+  --mm-ember: #E8572A;
+  --mm-border: #2A2A2A;
+  --mm-bg-blur: rgba(15,15,15,0.96);
+}
+
+:root[data-theme="light"] {
+  --mm-bg: #F7F4ED;
+  --mm-surface: #FFFFFF;
+  --mm-surface-alt: #EFEAE0;
+  --mm-text: #1A1814;
+  --mm-text-sec: #6B6356;
+  --mm-gold: #A8854F;
+  --mm-gold-hover: #8F6F3E;
+  --mm-ember: #D14A1F;
+  --mm-border: #D9D2C2;
+  --mm-bg-blur: rgba(247,244,237,0.92);
+}
+
+html, body { background: var(--mm-bg); color: var(--mm-text); transition: background 0.35s ease, color 0.35s ease; }
+input::placeholder, textarea::placeholder { color: var(--mm-text-sec); opacity: 0.7; }

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import formCheck from "../assets/lotties/form-check.json";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -45,9 +47,9 @@ function DarkMap() {
 }
 
 const DS = {
-  bg: "#0F0F0F", surface: "#1E1E1E", surfaceAlt: "#161616",
-  text: "#F5F0E8", textSec: "#8A8477", gold: "#C9A96E",
-  ember: "#E8572A", border: "#2A2A2A",
+  bg: "var(--mm-bg)", surface: "var(--mm-surface)", surfaceAlt: "var(--mm-surface-alt)",
+  text: "var(--mm-text)", textSec: "var(--mm-text-sec)", gold: "var(--mm-gold)",
+  ember: "var(--mm-ember)", border: "var(--mm-border)",
 };
 
 const fontLink = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap";
@@ -109,7 +111,7 @@ function ContactForm() {
   const inputBase = {
     width: "100%", padding: "14px 16px",
     fontFamily: "'DM Sans'", fontSize: 14, color: DS.text,
-    background: "rgba(30,30,30,0.5)", border: `1px solid ${DS.border}`,
+    background: DS.surfaceAlt, border: `1px solid ${DS.border}`,
     outline: "none", transition: "border-color 0.3s, background 0.3s",
   };
 
@@ -119,13 +121,15 @@ function ContactForm() {
     display: "block", marginBottom: 8,
   };
 
-  const focusHandler = (e) => { e.target.style.borderColor = DS.gold; e.target.style.background = "rgba(40,38,34,0.5)"; };
-  const blurHandler = (e) => { e.target.style.borderColor = DS.border; e.target.style.background = "rgba(30,30,30,0.5)"; };
+  const focusHandler = (e) => { e.target.style.borderColor = DS.gold; e.target.style.background = DS.surface; };
+  const blurHandler = (e) => { e.target.style.borderColor = DS.border; e.target.style.background = DS.surfaceAlt; };
 
   if (submitted) {
     return (
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: "center", padding: "60px 0" }}>
-        <div style={{ fontFamily: "'DM Sans'", fontSize: 48, color: DS.gold, marginBottom: 20 }}>✓</div>
+        <div style={{ width: 140, height: 140, margin: "0 auto" }}>
+          <DotLottieReact data={formCheck} autoplay />
+        </div>
         <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 32, fontWeight: 700, color: DS.text, margin: "0 0 12px" }}>Message Sent</h3>
         <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, color: DS.textSec, fontStyle: "italic", margin: "0 0 24px" }}>
           We'll be in touch within 24 hours. Can't wait to hear about your day.
@@ -590,10 +594,10 @@ export default function ContactPage() {
           border: `1px solid ${DS.border}`, padding: "20px 24px", maxWidth: 280,
           lineHeight: 1.4,
         }}>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 700, color: DS.text, marginBottom: 4 }}>
-            Move Mountains <span style={{ color: DS.gold }}>Co.</span>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 700, color: "#F5F0E8", marginBottom: 4 }}>
+            Move Mountains <span style={{ color: "#C9A96E" }}>Co.</span>
           </div>
-          <div style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, lineHeight: 1.5 }}>
+          <div style={{ fontFamily: "'DM Sans'", fontSize: 13, color: "#8A8477", lineHeight: 1.5 }}>
             28 Wolcott St<br />Providence, RI 02908
           </div>
           <a href="https://www.google.com/maps/place/Move+Mountains+Co./@41.8295914,-71.436619,1035m/data=!3m2!1e3!4b1!4m6!3m5!1s0x89e44a51d0ddeee7:0x8af0fa2164e7e541!8m2!3d41.8295914!4d-71.4340441!16s%2Fg%2F11bc6z7s5r" target="_blank" rel="noopener noreferrer" style={{
