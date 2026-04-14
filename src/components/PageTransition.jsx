@@ -115,6 +115,13 @@ export function PageTransitionProvider({ children }) {
 
       if (path === location.pathname + location.search + location.hash) return;
 
+      // Dashboard-internal navigation skips the cinematic transition entirely:
+      // it should feel like a web app, not an editorial site. We only use the
+      // slide-cover transition when crossing the boundary between public/dash.
+      const fromDash = location.pathname.startsWith("/dashboard");
+      const toDash = path.startsWith("/dashboard");
+      if (fromDash && toDash) return;
+
       e.preventDefault();
       navigateTo(path);
     };

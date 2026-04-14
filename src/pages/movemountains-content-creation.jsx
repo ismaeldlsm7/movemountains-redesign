@@ -55,7 +55,7 @@ export default function ContentCreationPage() {
       <div style={{ background: DS.surface, borderTop: `1px solid ${DS.border}`, borderBottom: `1px solid ${DS.border}`, padding: "80px 32px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <FadeIn><div style={{ marginBottom: 40 }}><div style={{ fontFamily: "'DM Sans'", fontSize: 12, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 12 }}>What You Get</div><h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700, color: DS.text, margin: 0 }}>Content Deliverables</h2></div></FadeIn>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {deliverables.map((d, i) => <FadeIn key={d.title} delay={i * 0.06}><div style={{ padding: "24px", border: `1px solid ${DS.border}`, height: "100%", transition: "border-color 0.3s" }} onMouseEnter={(e) => e.currentTarget.style.borderColor = DS.gold} onMouseLeave={(e) => e.currentTarget.style.borderColor = DS.border}>
               <div style={{ fontFamily: "'DM Sans'", fontSize: 22, color: DS.gold, opacity: 0.6, marginBottom: 12 }}>{d.icon}</div>
               <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 600, color: DS.text, marginBottom: 8 }}>{d.title}</h3>
@@ -87,7 +87,7 @@ export default function ContentCreationPage() {
             <div style={{ fontFamily: "'Bebas Neue'", fontSize: 56, color: DS.gold, margin: "8px 0 20px" }}>$900</div>
             <p style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.textSec, marginBottom: 8 }}>Dedicated content creator on-site. Same-day Stories. 15–25 edited vertical videos. 48-hour full delivery.</p>
             <p style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, opacity: 0.7, marginBottom: 28 }}>Includes all platforms: Instagram Reels, TikTok, Stories, YouTube Shorts.</p>
-            <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }} onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Add Content Creation</a>
+            <a href="/book?addon=content-creation" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }} onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Add Content Creation</a>
           </FadeIn>
         </div>
       </div>

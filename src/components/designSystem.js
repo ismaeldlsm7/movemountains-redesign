@@ -34,6 +34,7 @@ export const navSections = [
   { label: "Services", href: "/services", subs: [
     { label: "Photography", href: "/photography" }, { label: "Videography", href: "/videography" }, { label: "Super 8 Film", href: "/super8" },
     { label: "Content Creation", href: "/content-creation" }, { label: "Luxe Booth", href: "/luxebooth" }, { label: "Albums", href: "/albums" }, { label: "Live Streaming", href: "/livestreaming" },
+    { label: "Photo Looks", href: "/looks" }, { label: "Video Looks", href: "/video-looks" },
   ]},
   { label: "Investment", href: "/investment" },
   { label: "Blog", href: "/blog" },

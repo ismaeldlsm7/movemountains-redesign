@@ -638,21 +638,21 @@ export default function AcademyPage() {
             Not ready to apply? Follow our work and see the standard we're building.
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="#" style={{
+            <a href="/portfolio" style={{
               fontFamily: "'DM Sans'", fontSize: 13, color: DS.gold, padding: "14px 28px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em",
               border: `1px solid ${DS.gold}`, transition: "all 0.3s",
             }}
               onMouseEnter={(e) => { e.target.style.background = DS.gold; e.target.style.color = DS.bg; }}
               onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.color = DS.gold; }}
             >View Portfolio</a>
-            <a href="#" style={{
+            <a href="/team" style={{
               fontFamily: "'DM Sans'", fontSize: 13, color: DS.gold, padding: "14px 28px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em",
               border: `1px solid ${DS.gold}`, transition: "all 0.3s",
             }}
               onMouseEnter={(e) => { e.target.style.background = DS.gold; e.target.style.color = DS.bg; }}
               onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.color = DS.gold; }}
             >Meet the Team</a>
-            <a href="#" style={{
+            <a href="https://www.instagram.com/movemountainsco" target="_blank" rel="noopener noreferrer" style={{
               fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, padding: "14px 28px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em",
               border: `1px solid ${DS.border}`, transition: "all 0.3s",
             }}

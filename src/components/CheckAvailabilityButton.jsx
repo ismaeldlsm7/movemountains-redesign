@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { DS } from "./designSystem";
 
 export default function CheckAvailabilityButton({
-  to = "/contact",
+  to = "/book",
   label = "Check Availability",
   fontSize = 14,
   padding = "16px 40px",

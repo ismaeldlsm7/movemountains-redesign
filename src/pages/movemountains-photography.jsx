@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CheckAvailabilityButton from "../components/CheckAvailabilityButton";
@@ -66,7 +67,7 @@ export default function PhotographyPage() {
       {/* Stats */}
       <div style={{ background: DS.surface, borderTop: `1px solid ${DS.border}`, borderBottom: `1px solid ${DS.border}`, padding: "48px 32px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: 32 }}>
-          <StatCounter value="500" suffix="+" label="Weddings Shot" /><StatCounter value="1000" suffix="+" label="Images Per Wedding" delay={0.1} /><StatCounter value="5" label="Editing Styles" delay={0.2} /><StatCounter value="1" label="Wedding Per Day" delay={0.3} />
+          <StatCounter value="500" suffix="+" label="Weddings Shot" /><StatCounter value="1000" suffix="+" label="Images Per Wedding" delay={0.1} /><StatCounter value="7" label="Editing Styles" delay={0.2} /><StatCounter value="1" label="Wedding Per Day" delay={0.3} />
         </div>
       </div>
 
@@ -93,15 +94,28 @@ export default function PhotographyPage() {
             {[{ i: "◎", t: "Full-Day Coverage", d: "One wedding per day. Your team is fully dedicated from getting ready to the last dance." },
               { i: "◇", t: "Engagement Session", d: "A complimentary pre-wedding shoot to build chemistry with your photographer and get comfortable on camera." },
               { i: "▣", t: "Online Gallery", d: "A private, beautifully designed gallery for viewing, downloading, and ordering professional prints." },
-              { i: "△", t: "5 Editing Styles", d: "Choose from Classic, Portra, Moody, Bright, or Cinematic — each transforms the mood of your images." },
+              { i: "△", t: "7 Editing Styles", d: "Choose your look — Classic, Art, Light + Bright, Radiant, and more. Each one transforms the mood of every image.", href: "/looks" },
               { i: "○", t: "Digital Delivery", d: "All images delivered in full resolution. Print anywhere, share everywhere, keep forever." },
               { i: "□", t: "Planning Support", d: "Timeline building, shot list coordination, and vendor communication handled by our planning team." },
             ].map((f, i) => (
-              <FadeIn key={f.t} delay={i * 0.06}><div style={{ padding: "24px", border: `1px solid ${DS.border}`, height: "100%", transition: "border-color 0.3s" }} onMouseEnter={(e) => e.currentTarget.style.borderColor = DS.gold} onMouseLeave={(e) => e.currentTarget.style.borderColor = DS.border}>
-                <div style={{ fontFamily: "'DM Sans'", fontSize: 22, color: DS.gold, opacity: 0.6, marginBottom: 12 }}>{f.i}</div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 600, color: DS.text, marginBottom: 8 }}>{f.t}</h3>
-                <p style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, lineHeight: 1.6 }}>{f.d}</p>
-              </div></FadeIn>
+              <FadeIn key={f.t} delay={i * 0.06}>
+                {f.href ? (
+                  <Link to={f.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+                    <div style={{ padding: "24px", border: `1px solid ${DS.border}`, height: "100%", transition: "border-color 0.3s" }} onMouseEnter={(e) => e.currentTarget.style.borderColor = DS.gold} onMouseLeave={(e) => e.currentTarget.style.borderColor = DS.border}>
+                      <div style={{ fontFamily: "'DM Sans'", fontSize: 22, color: DS.gold, opacity: 0.6, marginBottom: 12 }}>{f.i}</div>
+                      <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 600, color: DS.text, marginBottom: 8 }}>{f.t}</h3>
+                      <p style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, lineHeight: 1.6, marginBottom: 12 }}>{f.d}</p>
+                      <span style={{ fontFamily: "'DM Sans'", fontSize: 11, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.1em" }}>Browse all 7 looks →</span>
+                    </div>
+                  </Link>
+                ) : (
+                  <div style={{ padding: "24px", border: `1px solid ${DS.border}`, height: "100%", transition: "border-color 0.3s" }} onMouseEnter={(e) => e.currentTarget.style.borderColor = DS.gold} onMouseLeave={(e) => e.currentTarget.style.borderColor = DS.border}>
+                    <div style={{ fontFamily: "'DM Sans'", fontSize: 22, color: DS.gold, opacity: 0.6, marginBottom: 12 }}>{f.i}</div>
+                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 600, color: DS.text, marginBottom: 8 }}>{f.t}</h3>
+                    <p style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, lineHeight: 1.6 }}>{f.d}</p>
+                  </div>
+                )}
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -144,7 +158,7 @@ export default function PhotographyPage() {
                   {[{ l: "Hours", v: p.hours }, { l: "Shooters", v: p.shooters }, { l: "Images", v: p.images }].map((s) => <div key={s.l} style={{ background: p.popular ? DS.surfaceAlt : DS.bg, padding: "12px 8px", textAlign: "center" }}><div style={{ fontFamily: "'DM Sans'", fontSize: 9, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.08em" }}>{s.l}</div><div style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.text, marginTop: 2, fontWeight: 500 }}>{s.v}</div></div>)}
                 </div>
                 {p.includes.map((inc, ii) => <div key={ii} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 0" }}><span style={{ width: 5, height: 5, background: DS.gold, borderRadius: "50%", flexShrink: 0 }} /><span style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec }}>{inc}</span></div>)}
-                <a href="#" style={{ display: "block", textAlign: "center", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 600, color: p.popular ? DS.bg : DS.gold, background: p.popular ? DS.ember : "transparent", border: p.popular ? "none" : `1px solid ${DS.gold}`, padding: "14px 0", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", marginTop: 20, transition: "all 0.3s" }}
+                <a href={`/book?package=${p.id}`} style={{ display: "block", textAlign: "center", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 600, color: p.popular ? DS.bg : DS.gold, background: p.popular ? DS.ember : "transparent", border: p.popular ? "none" : `1px solid ${DS.gold}`, padding: "14px 0", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", marginTop: 20, transition: "all 0.3s" }}
                   onMouseEnter={(e) => { if (p.popular) e.target.style.background = "#ff6b3d"; else { e.target.style.background = DS.gold; e.target.style.color = DS.bg; } }}
                   onMouseLeave={(e) => { if (p.popular) e.target.style.background = DS.ember; else { e.target.style.background = "transparent"; e.target.style.color = DS.gold; } }}>Book {p.name}</a>
               </div></FadeIn>
@@ -172,7 +186,7 @@ export default function PhotographyPage() {
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, color: DS.textSec, fontStyle: "italic", marginBottom: 32 }}>One wedding per day. Let's make sure it's yours.</p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <CheckAvailabilityButton />
-            <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", border: `1px solid ${DS.gold}`, transition: "all 0.3s" }} onMouseEnter={(e) => { e.target.style.background = DS.gold; e.target.style.color = DS.bg; }} onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.color = DS.gold; }}>View Portfolio</a>
+            <a href="/portfolio" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", border: `1px solid ${DS.gold}`, transition: "all 0.3s" }} onMouseEnter={(e) => { e.target.style.background = DS.gold; e.target.style.color = DS.bg; }} onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.color = DS.gold; }}>View Portfolio</a>
           </div>
         </FadeIn>
       </div>

@@ -571,14 +571,14 @@ export default function TeamPage() {
                 MMC Academy is a 9-month program for aspiring wedding photographers and videographers. Led by Tiahna Lynn and Yan La Mort, graduates get access to the MMC shooting roster — and a career in the industry they love.
               </p>
               <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-                <a href="#" style={{
+                <a href="/academy" style={{
                   fontFamily: "'DM Sans'", fontSize: 13, color: DS.bg, background: DS.ember,
                   padding: "14px 28px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600, transition: "background 0.3s",
                 }}
                   onMouseEnter={(e) => e.target.style.background = "#ff6b3d"}
                   onMouseLeave={(e) => e.target.style.background = DS.ember}
                 >Learn About Academy</a>
-                <a href="#" style={{
+                <a href="/careers" style={{
                   fontFamily: "'DM Sans'", fontSize: 13, color: DS.gold, padding: "14px 28px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em",
                   border: `1px solid ${DS.gold}`, transition: "all 0.3s",
                 }}

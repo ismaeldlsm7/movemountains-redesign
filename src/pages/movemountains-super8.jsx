@@ -62,7 +62,7 @@ export default function Super8Page() {
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 36, fontWeight: 700, color: DS.text, margin: "0 0 8px" }}>Super 8 Film</h2>
             <div style={{ fontFamily: "'Bebas Neue'", fontSize: 56, color: DS.gold, margin: "8px 0 20px" }}>$1,200</div>
             <p style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.textSec, marginBottom: 28 }}>3–4 minute analog film reel. Shot on vintage Super 8mm cameras. Lab-processed. Digitally delivered. Add to any photography or videography package.</p>
-            <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }} onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Add Super 8 to Your Wedding</a>
+            <a href="/book?addon=super8" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }} onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Add Super 8 to Your Wedding</a>
           </FadeIn>
         </div>
       </div>

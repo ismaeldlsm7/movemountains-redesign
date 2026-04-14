@@ -459,14 +459,14 @@ export default function AboutPage() {
             We'd love to hear your story.
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="#" style={{
+            <a href="/contact" style={{
               fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember,
               padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, transition: "background 0.3s",
             }}
               onMouseEnter={(e) => e.target.style.background = "#ff6b3d"}
               onMouseLeave={(e) => e.target.style.background = DS.ember}
             >Get in Touch</a>
-            <a href="/contact" style={{
+            <a href="/portfolio" style={{
               fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600,
               border: `1px solid ${DS.gold}`, transition: "all 0.3s",
             }}

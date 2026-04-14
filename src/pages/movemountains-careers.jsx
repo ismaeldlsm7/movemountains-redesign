@@ -137,7 +137,7 @@ export default function CareersPage() {
           <div style={{ fontFamily: "'DM Sans'", fontSize: 12, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 16 }}>Just Starting Out?</div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700, color: DS.text, margin: "0 0 12px" }}>MMC Academy</h2>
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, color: DS.textSec, fontStyle: "italic", marginBottom: 28, maxWidth: 500, margin: "0 auto 28px" }}>Not ready for the roster yet? Our 9-month Academy program trains aspiring wedding creatives from the ground up — with a direct path to paid MMC assignments.</p>
-          <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "14px 32px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", border: `1px solid ${DS.gold}`, display: "inline-block", transition: "all 0.3s" }}
+          <a href="/academy" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "14px 32px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", border: `1px solid ${DS.gold}`, display: "inline-block", transition: "all 0.3s" }}
             onMouseEnter={(e) => { e.target.style.background = DS.gold; e.target.style.color = DS.bg; }} onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.color = DS.gold; }}>Learn About Academy</a>
         </FadeIn>
       </div>
