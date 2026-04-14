@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TransitionLink, MenuTransitionLink } from "./PageTransition";
 import { DS, navSections, socialLinks } from "./designSystem";
+import UserIcon from "./UserIcon";
 
 export default function Header({ activePage }) {
   const [scrolled, setScrolled] = useState(false);
@@ -92,8 +93,9 @@ export default function Header({ activePage }) {
         <div style={{ display: "flex", alignItems: "center", gap: 20, position: "relative", zIndex: 10000 }}>
           <AnimatePresence>
             {!menuOpen && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-                <TransitionLink to="/contact" className="header-cta fill-up-btn cta-rollover" style={{
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                <TransitionLink to="/book" className="header-cta fill-up-btn cta-rollover" style={{
                   fontFamily: "'DM Sans'", fontSize: 11.5, color: DS.bg, background: DS.ember,
                   padding: "9px 20px", textDecoration: "none", letterSpacing: "0.07em", textTransform: "uppercase", fontWeight: 600, display: "inline-block",
                   position: "relative", overflow: "hidden", isolation: "isolate",
@@ -107,6 +109,7 @@ export default function Header({ activePage }) {
                     ))}
                   </span>
                 </TransitionLink>
+                <UserIcon />
               </motion.div>
             )}
           </AnimatePresence>

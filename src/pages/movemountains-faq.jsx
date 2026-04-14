@@ -159,9 +159,9 @@ export default function FAQPage() {
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700, color: DS.text, margin: "0 0 12px" }}>Still Have Questions?</h2>
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, color: DS.textSec, fontStyle: "italic", marginBottom: 28 }}>We respond to every inquiry within 24 hours.</p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 36px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, transition: "background 0.3s" }}
+            <a href="/contact" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 36px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, transition: "background 0.3s" }}
               onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Contact Us</a>
-            <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "16px 36px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", border: `1px solid ${DS.gold}`, transition: "all 0.3s" }}
+            <a href="/investment" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.gold, padding: "16px 36px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", border: `1px solid ${DS.gold}`, transition: "all 0.3s" }}
               onMouseEnter={(e) => { e.target.style.background = DS.gold; e.target.style.color = DS.bg; }} onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.color = DS.gold; }}>View Investment</a>
           </div>
         </FadeIn>

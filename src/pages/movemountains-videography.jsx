@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CheckAvailabilityButton from "../components/CheckAvailabilityButton";
@@ -73,6 +74,33 @@ export default function VideographyPage() {
         </div>
       </div>
 
+      {/* Video Looks callout */}
+      <div style={{ padding: "0 32px 64px" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+          <FadeIn>
+            <Link to="/video-looks" style={{ textDecoration: "none", display: "block" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: 24, padding: "32px 36px", border: `1px solid ${DS.gold}44`, background: `${DS.gold}06`, transition: "border-color 0.3s" }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = DS.gold}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = `${DS.gold}44`}>
+                <div>
+                  <div style={{ fontFamily: "'DM Sans'", fontSize: 11, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.18em", marginBottom: 8 }}>Choose Before You Book</div>
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(20px, 2.5vw, 26px)", fontWeight: 700, color: DS.text, margin: "0 0 6px" }}>3 Cinematic Color Grades</h3>
+                  <p style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.textSec, lineHeight: 1.6, margin: 0 }}>Classic, Art, and Art 2 — each one shapes the mood, tone, and feeling of how your story is told. Browse all three before your consultation.</p>
+                </div>
+                <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                  {["#231c18", "#221c18", "#1e1a1e"].map((c, i) => (
+                    <div key={i} style={{ width: 36, height: 52, background: c, flexShrink: 0 }} />
+                  ))}
+                  <div style={{ display: "flex", alignItems: "center", paddingLeft: 16 }}>
+                    <span style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.08em", whiteSpace: "nowrap" }}>View Looks →</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </FadeIn>
+        </div>
+      </div>
+
       {/* Stats + Pricing */}
       <div style={{ padding: "80px 32px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 32, marginBottom: 56 }}>
@@ -86,7 +114,7 @@ export default function VideographyPage() {
           <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 32, fontWeight: 700, color: DS.text, margin: "0 0 4px" }}>Photo + Film</h3>
           <div style={{ fontFamily: "'Bebas Neue'", fontSize: 52, color: DS.gold, margin: "8px 0 16px" }}>$8,500</div>
           <p style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.textSec, marginBottom: 24 }}>2 photographers + 1 cinematographer. 10+ hours. Highlight film + full ceremony. Custom album included.</p>
-          <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "14px 36px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }} onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Book Cinematic</a>
+          <a href="/book?package=cinematic" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "14px 36px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }} onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Book Cinematic</a>
         </div></FadeIn>
       </div>
 

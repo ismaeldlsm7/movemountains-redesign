@@ -86,7 +86,7 @@ export default function AlbumsPage() {
                       </div>
                     ))}
                   </div>
-                  <a href="#" style={{ display: "block", textAlign: "center", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 600, color: a.popular ? DS.bg : DS.gold, background: a.popular ? DS.ember : "transparent", border: a.popular ? "none" : `1px solid ${DS.gold}`, padding: "14px 0", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", marginTop: 20, transition: "all 0.3s" }}
+                  <a href="/book?addon=custom-album" style={{ display: "block", textAlign: "center", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 600, color: a.popular ? DS.bg : DS.gold, background: a.popular ? DS.ember : "transparent", border: a.popular ? "none" : `1px solid ${DS.gold}`, padding: "14px 0", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.08em", marginTop: 20, transition: "all 0.3s" }}
                     onMouseEnter={(e) => { if (a.popular) e.target.style.background = "#ff6b3d"; else { e.target.style.background = DS.gold; e.target.style.color = DS.bg; } }}
                     onMouseLeave={(e) => { if (a.popular) e.target.style.background = DS.ember; else { e.target.style.background = "transparent"; e.target.style.color = DS.gold; } }}
                   >Order This Album</a>
@@ -124,7 +124,7 @@ export default function AlbumsPage() {
         <FadeIn>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, color: DS.text, margin: "0 0 12px" }}>Already Have Your Photos?</h2>
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, color: DS.textSec, fontStyle: "italic", marginBottom: 32 }}>Albums can be ordered anytime after your wedding — even years later.</p>
-          <a href="#" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }}
+          <a href="/book?addon=custom-album" style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.bg, background: DS.ember, padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600, display: "inline-block", transition: "background 0.3s" }}
             onMouseEnter={(e) => e.target.style.background = "#ff6b3d"} onMouseLeave={(e) => e.target.style.background = DS.ember}>Start Your Album</a>
         </FadeIn>
       </div>

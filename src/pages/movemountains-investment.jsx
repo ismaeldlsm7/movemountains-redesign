@@ -1,98 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CheckAvailabilityButton from "../components/CheckAvailabilityButton";
-
-const DS = {
-  bg: "var(--mm-bg)", surface: "var(--mm-surface)", surfaceAlt: "var(--mm-surface-alt)",
-  text: "var(--mm-text)", textSec: "var(--mm-text-sec)", gold: "var(--mm-gold)",
-  ember: "var(--mm-ember)", border: "var(--mm-border)",
-};
-
-const fontLink = "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap";
-
-/* ── Data ────────────────────────────────────────────────────────── */
-
-const packages = [
-  {
-    id: "essentials",
-    name: "Essentials",
-    subtitle: "The Foundation",
-    price: "3,200",
-    description: "Everything you need to capture the day beautifully. Perfect for intimate weddings and couples who want one dedicated photographer telling their story from start to finish.",
-    hours: "6",
-    photographers: "1",
-    popular: false,
-    features: [
-      { text: "6 hours of coverage", included: true },
-      { text: "1 dedicated photographer", included: true },
-      { text: "Complimentary engagement session", included: true },
-      { text: "Online gallery with print ordering", included: true },
-      { text: "All photos delivered digitally", included: true },
-      { text: "Choice of 5 editing styles", included: true },
-      { text: "~600 images delivered", included: true },
-      { text: "Second photographer", included: false },
-      { text: "Custom wedding album", included: false },
-      { text: "Videography", included: false },
-    ],
-  },
-  {
-    id: "signature",
-    name: "Signature",
-    subtitle: "Our Most Popular",
-    price: "5,400",
-    description: "The complete MMC experience. Two photographers capturing every angle, extended coverage from getting ready through the last dance, and a premium album to hold forever.",
-    hours: "8–10",
-    photographers: "2",
-    popular: true,
-    features: [
-      { text: "8–10 hours of coverage", included: true },
-      { text: "2 dedicated photographers", included: true },
-      { text: "Complimentary engagement session", included: true },
-      { text: "Online gallery with print ordering", included: true },
-      { text: "All photos delivered digitally", included: true },
-      { text: "Choice of 5 editing styles", included: true },
-      { text: "~800–1,000 images delivered", included: true },
-      { text: "Custom lay-flat wedding album", included: true },
-      { text: "Sneak peek within 3 days", included: true },
-      { text: "Videography", included: false },
-    ],
-  },
-  {
-    id: "cinematic",
-    name: "Cinematic",
-    subtitle: "Photo + Film",
-    price: "8,500",
-    description: "The full story — captured in both stills and motion. Everything in Signature, plus a cinematic wedding film that lets you relive the vows, the toasts, and every moment in between.",
-    hours: "10+",
-    photographers: "2 + Cinematographer",
-    popular: false,
-    features: [
-      { text: "10+ hours of full-day coverage", included: true },
-      { text: "2 photographers + 1 cinematographer", included: true },
-      { text: "Complimentary engagement session", included: true },
-      { text: "Online gallery with print ordering", included: true },
-      { text: "~1,000+ images delivered", included: true },
-      { text: "Choice of 5 editing styles", included: true },
-      { text: "Custom lay-flat wedding album", included: true },
-      { text: "4–6 min cinematic highlight film", included: true },
-      { text: "Full ceremony film", included: true },
-      { text: "4K delivery", included: true },
-    ],
-  },
-];
-
-const addOns = [
-  { name: "Second Photographer", price: "750", desc: "Add a second angle to any single-photographer package. Recommended for weddings with 150+ guests or multiple locations.", icon: "◎" },
-  { name: "Super 8 Film", price: "1,200", desc: "Real analog film shot on vintage Super 8mm cameras. Lab-processed, digitally scanned. 3–4 minute highlight reel.", icon: "◉" },
-  { name: "Content Creation", price: "900", desc: "Dedicated content creator for vertical video, same-day stories, and social-first behind-the-scenes coverage.", icon: "✦" },
-  { name: "Luxe Booth", price: "1,100", desc: "4 hours of premium photo booth. High-quality prints, Airdrop sharing, custom branding. Zero cheesy props.", icon: "□" },
-  { name: "Live Streaming", price: "600", desc: "Professional HD broadcast of your ceremony with private, secure link. No app required for viewers.", icon: "◈" },
-  { name: "Extra Hours", price: "350/hr", desc: "Extend your coverage beyond your package. Available for both photography and videography.", icon: "+" },
-  { name: "Custom Album", price: "From 800", desc: "Lay-flat premium wedding album. Choose from multiple sizes, cover materials, and page counts.", icon: "▣" },
-  { name: "Rehearsal Coverage", price: "500", desc: "Photographer present at your rehearsal dinner to capture the night-before moments and vendor setups.", icon: "◇" },
-];
+import { DS, fontLink } from "../components/designSystem";
+import { PACKAGES as packages, ADD_ONS as addOns, ELOPEMENT_STARTING_PRICE } from "../data/pricing";
 
 const faqs = [
   { q: "What's included in every package?", a: "Every MMC package includes a complimentary engagement session, full-day coverage, an online gallery with print ordering, all photos delivered digitally, and your choice of 5 editing styles. We only take one wedding per day — your team is fully dedicated to you." },
@@ -102,7 +15,7 @@ const faqs = [
   { q: "How soon should we book?", a: "Popular dates (May–October Saturdays) book 12–18 months in advance. Weekday and off-season dates have more flexibility. We recommend reaching out as soon as you have a date and venue confirmed." },
   { q: "When will we receive our photos and video?", a: "Sneak peek of 20–30 images: 3–5 days. Full gallery: 6–8 weeks. Highlight film: 8–12 weeks. Full ceremony/reception films: 10–14 weeks. Rush delivery available for an additional fee." },
   { q: "What if we need to reschedule?", a: "Life happens. If you need to change your date, we'll do our best to accommodate. Rescheduling requests made 90+ days before the original date are transferred at no extra cost, subject to availability." },
-  { q: "Do you offer elopement packages?", a: "Yes. For elopements and micro-weddings (under 30 guests), we offer streamlined packages starting at $2,200. Reach out for a custom quote based on your timeline and location." },
+  { q: "Do you offer elopement packages?", a: `Yes. For elopements and micro-weddings (under 30 guests), we offer streamlined packages starting at $${ELOPEMENT_STARTING_PRICE.displayPrice}. Reach out for a custom quote based on your timeline and location.` },
 ];
 
 /* ── Helpers ─────────────────────────────────────────────────────── */
@@ -168,7 +81,7 @@ function PackageCard({ pkg, index }) {
           <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, color: DS.textSec, fontWeight: 400 }}>Starting at</span>
         </div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginTop: 4 }}>
-          <span style={{ fontFamily: "'Bebas Neue'", fontSize: "clamp(44px, 5vw, 56px)", color: DS.gold, lineHeight: 1 }}>${pkg.price}</span>
+          <span style={{ fontFamily: "'Bebas Neue'", fontSize: "clamp(44px, 5vw, 56px)", color: DS.gold, lineHeight: 1 }}>${pkg.displayPrice}</span>
         </div>
       </div>
 
@@ -233,7 +146,7 @@ function PackageCard({ pkg, index }) {
 
       {/* CTA */}
       <div style={{ padding: "0 28px 28px" }}>
-        <a href="#contact" style={{
+        <a href={`/book?package=${pkg?.id || ''}`} style={{
           display: "block", textAlign: "center",
           fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 600,
           color: pkg.popular ? DS.bg : DS.gold,
@@ -272,7 +185,7 @@ function AddOnCard({ addon, index }) {
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
           <span style={{ fontFamily: "'DM Sans'", fontSize: 22, color: DS.gold, opacity: 0.6 }}>{addon.icon}</span>
-          <span style={{ fontFamily: "'Bebas Neue'", fontSize: 22, color: DS.gold, lineHeight: 1 }}>${addon.price}</span>
+          <span style={{ fontFamily: "'Bebas Neue'", fontSize: 22, color: DS.gold, lineHeight: 1 }}>{addon.pricePrefix || ""}${addon.displayPrice}</span>
         </div>
         <h4 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 600, color: DS.text, margin: "0 0 8px" }}>{addon.name}</h4>
         <p style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, lineHeight: 1.6, flex: 1 }}>{addon.desc}</p>
@@ -290,7 +203,7 @@ function ComparisonTable() {
     { feature: "Cinematographer", essentials: "—", signature: "—", cinematic: "1" },
     { feature: "Engagement Session", essentials: "✓", signature: "✓", cinematic: "✓" },
     { feature: "Images Delivered", essentials: "~600", signature: "~800–1,000", cinematic: "~1,000+" },
-    { feature: "Editing Styles", essentials: "5", signature: "5", cinematic: "5" },
+    { feature: "Editing Styles", essentials: "7", signature: "7", cinematic: "7 + video", isLooks: true },
     { feature: "Online Gallery", essentials: "✓", signature: "✓", cinematic: "✓" },
     { feature: "Wedding Album", essentials: "—", signature: "✓", cinematic: "✓" },
     { feature: "Highlight Film", essentials: "—", signature: "—", cinematic: "4–6 min" },
@@ -317,13 +230,33 @@ function ComparisonTable() {
         <tbody>
           {rows.map((row, i) => (
             <tr key={row.feature} style={{ background: i % 2 === 0 ? "transparent" : "rgba(30,30,30,0.3)" }}>
-              <td style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, padding: "12px 16px", borderBottom: `1px solid ${DS.border}` }}>{row.feature}</td>
+              <td style={{ fontFamily: "'DM Sans'", fontSize: 13, color: DS.textSec, padding: "12px 16px", borderBottom: `1px solid ${DS.border}` }}>
+                {row.isLooks ? (
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    {row.feature}
+                    <Link to="/looks" style={{ fontFamily: "'DM Sans'", fontSize: 10, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.08em", textDecoration: "none", opacity: 0.7, whiteSpace: "nowrap" }}
+                      onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
+                      onMouseLeave={(e) => e.currentTarget.style.opacity = 0.7}>
+                      View →
+                    </Link>
+                  </span>
+                ) : row.feature}
+              </td>
               {["essentials", "signature", "cinematic"].map((pkg) => (
                 <td key={pkg} style={{
                   fontFamily: "'DM Sans'", fontSize: 13, textAlign: "center",
                   color: row[pkg] === "✓" ? DS.gold : row[pkg] === "—" ? DS.border : DS.text,
                   padding: "12px 16px", borderBottom: `1px solid ${DS.border}`,
-                }}>{row[pkg]}</td>
+                }}>
+                  {row.isLooks && pkg === "cinematic" ? (
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                      {row[pkg]}
+                      <Link to="/video-looks" style={{ fontFamily: "'DM Sans'", fontSize: 9, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.06em", textDecoration: "none", opacity: 0.7, whiteSpace: "nowrap" }}
+                        onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
+                        onMouseLeave={(e) => e.currentTarget.style.opacity = 0.7}>↗</Link>
+                    </span>
+                  ) : row[pkg]}
+                </td>
               ))}
             </tr>
           ))}
@@ -339,7 +272,7 @@ function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <div>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "0 32px" }}>
       {faqs.map((faq, i) => (
         <FadeIn key={i} delay={i * 0.03}>
           <div style={{ borderBottom: `1px solid ${DS.border}` }}>
@@ -541,7 +474,7 @@ export default function InvestmentPage() {
               <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 20, fontWeight: 600, color: DS.text }}>Elopements & Micro-Weddings</span>
               <span style={{ fontFamily: "'DM Sans'", fontSize: 14, color: DS.textSec, marginLeft: 12 }}>Streamlined packages from $2,200</span>
             </div>
-            <a href="#contact" style={{
+            <a href="/contact" style={{
               fontFamily: "'DM Sans'", fontSize: 12, color: DS.gold, textDecoration: "none",
               textTransform: "uppercase", letterSpacing: "0.08em", borderBottom: `1px solid ${DS.gold}`, paddingBottom: 2,
             }}>Get a Quote →</a>
@@ -583,7 +516,7 @@ export default function InvestmentPage() {
 
       {/* ── FAQ ───────────────────────────────────────────────────── */}
       <div style={{ borderTop: `1px solid ${DS.border}`, padding: "80px 32px" }}>
-        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <div style={{ fontFamily: "'DM Sans'", fontSize: 12, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 12 }}>Common Questions</div>

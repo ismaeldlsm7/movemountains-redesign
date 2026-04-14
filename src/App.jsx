@@ -34,6 +34,11 @@ import Super8 from "./pages/movemountains-super8";
 import ContentCreation from "./pages/movemountains-content-creation";
 import LiveStreaming from "./pages/movemountains-livestreaming";
 import WeddingEditorial from "./pages/movemountains-wedding-editorial";
+import VideoLooks from "./pages/movemountains-video-looks";
+import Intern from "./pages/movemountains-intern";
+import Rentals from "./pages/movemountains-rentals";
+import PreferredVendors from "./pages/movemountains-preferred-vendors";
+import NotFound from "./pages/movemountains-404";
 
 function SmoothScroll() {
   const { pathname } = useLocation();
@@ -89,6 +94,7 @@ export default function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/looks" element={<Looks />} />
+        <Route path="/video-looks" element={<VideoLooks />} />
         <Route path="/venues" element={<Venues />} />
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/press" element={<Press />} />
@@ -103,6 +109,10 @@ export default function App() {
         <Route path="/super8" element={<Super8 />} />
         <Route path="/content-creation" element={<ContentCreation />} />
         <Route path="/livestreaming" element={<LiveStreaming />} />
+        <Route path="/intern" element={<Intern />} />
+        <Route path="/rentals" element={<Rentals />} />
+        <Route path="/preferred-vendors" element={<PreferredVendors />} />
+        <Route path="*" element={<NotFound />} />
         </Routes>
         <Analytics />
       </PageTransitionProvider>

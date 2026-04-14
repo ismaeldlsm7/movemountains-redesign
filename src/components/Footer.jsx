@@ -77,7 +77,7 @@ export default function Footer() {
           {[
             { title: "Explore", links: ["Portfolio","About","Team","Services","Investment","Blog","Academy"] },
             { title: "Services", links: [{l:"Photography",h:"/photography"},{l:"Videography",h:"/videography"},{l:"Super 8 Film",h:"/super8"},{l:"Content Creation",h:"/content-creation"},{l:"Luxe Booth",h:"/luxebooth"},{l:"Live Streaming",h:"/livestreaming"},{l:"Albums",h:"/albums"}] },
-            { title: "Resources", links: [{l:"Planning Portal",h:"/portal"},{l:"FAQs",h:"/faq"},{l:"Rentals",h:"/rentals"},{l:"MMC Academy",h:"/academy"},{l:"Careers",h:"/careers"},{l:"Intern Program",h:"/intern"}] },
+            { title: "Resources", links: [{l:"Planning Portal",h:"/portal"},{l:"Vendors",h:"/preferred-vendors"},{l:"FAQs",h:"/faq"},{l:"Rentals",h:"/rentals"},{l:"MMC Academy",h:"/academy"},{l:"Careers",h:"/careers"},{l:"Intern Program",h:"/intern"}] },
           ].map((col) => (
             <div key={col.title}>
               <div style={{ fontFamily: "'DM Sans'", fontSize: 11, color: DS.gold, textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 18 }}>{col.title}</div>
