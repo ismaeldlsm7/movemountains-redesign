@@ -5,8 +5,9 @@
 // ═══════════════════════════════════════════════════════════════════
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { resolveGallery } from "../gallery/galleryData";
+import { usePageTransition } from "../components/PageTransition";
 
 const ease = [0.25, 0.1, 0.25, 1];
 
@@ -47,6 +48,7 @@ export default function GalleryEntry() {
   const { token } = useParams();
   const g = resolveGallery(token);
   const filmCount = g.films.length;
+  const { triggerCinema } = usePageTransition();
 
   useEffect(() => {
     const prevTitle = document.title;
@@ -230,67 +232,65 @@ export default function GalleryEntry() {
               justifyContent: "center",
             }}
           >
-            <Link to={`/g/${token}/films`} style={{ textDecoration: "none" }}>
-              <button
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 9,
-                  background: "var(--mm-ember)",
-                  color: "#fff",
-                  fontSize: 11,
-                  fontWeight: 600,
-                  fontFamily: "'DM Sans', sans-serif",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  border: "none",
-                  padding: "14px 32px",
-                  cursor: "pointer",
-                  transition: "opacity 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            <button
+              onClick={() => triggerCinema(`/g/${token}/films`, g.couple, "film")}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 9,
+                background: "var(--mm-ember)",
+                color: "#fff",
+                fontSize: 11,
+                fontWeight: 600,
+                fontFamily: "'DM Sans', sans-serif",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                border: "none",
+                padding: "14px 32px",
+                cursor: "pointer",
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.82")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 12 12"
+                fill="currentColor"
+                style={{ flexShrink: 0 }}
               >
-                <svg
-                  width="11"
-                  height="11"
-                  viewBox="0 0 12 12"
-                  fill="currentColor"
-                  style={{ flexShrink: 0 }}
-                >
-                  <path d="M2 1.5l9 4.5-9 4.5V1.5z" />
-                </svg>
-                View Films
-              </button>
-            </Link>
+                <path d="M2 1.5l9 4.5-9 4.5V1.5z" />
+              </svg>
+              View Films
+            </button>
 
-            <Link to={`/g/${token}/photos`} style={{ textDecoration: "none" }}>
-              <button
-                style={{
-                  background: "transparent",
-                  color: "var(--mm-text)",
-                  fontSize: 11,
-                  fontWeight: 600,
-                  fontFamily: "'DM Sans', sans-serif",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  border: "1px solid var(--mm-border)",
-                  padding: "14px 32px",
-                  cursor: "pointer",
-                  transition: "border-color 0.3s, color 0.3s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--mm-gold)";
-                  e.currentTarget.style.color = "var(--mm-gold)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--mm-border)";
-                  e.currentTarget.style.color = "var(--mm-text)";
-                }}
-              >
-                Browse Photos
-              </button>
-            </Link>
+            <button
+              onClick={() => triggerCinema(`/g/${token}/photos`, g.couple, "photo")}
+              style={{
+                background: "transparent",
+                color: "var(--mm-text)",
+                fontSize: 11,
+                fontWeight: 600,
+                fontFamily: "'DM Sans', sans-serif",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                border: "1px solid var(--mm-border)",
+                padding: "14px 32px",
+                cursor: "pointer",
+                transition: "border-color 0.3s, color 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--mm-gold)";
+                e.currentTarget.style.color = "var(--mm-gold)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--mm-border)";
+                e.currentTarget.style.color = "var(--mm-text)";
+              }}
+            >
+              Browse Photos
+            </button>
           </div>
         </FadeUp>
       </div>

@@ -1,5 +1,5 @@
 // Shared components used by both gallery-photos and gallery-films pages.
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -21,6 +21,8 @@ export function FadeIn({ children, delay = 0, y = 18 }) {
 }
 
 export function GalleryHeader({ couple, token, activeTab }) {
+  const [backHover, setBackHover] = useState(false);
+
   return (
     <header
       style={{
@@ -33,7 +35,27 @@ export function GalleryHeader({ couple, token, activeTab }) {
         padding: "0 clamp(16px, 4vw, 32px)",
       }}
     >
-      <Link to={`/g/${token}`} style={{ textDecoration: "none", flexShrink: 0 }}>
+      {/* Back-to-gallery link — instant, no cinematic overlay */}
+      <Link
+        to={`/g/${token}`}
+        data-no-transition
+        onMouseEnter={() => setBackHover(true)}
+        onMouseLeave={() => setBackHover(false)}
+        style={{
+          textDecoration: "none", flexShrink: 0,
+          display: "flex", alignItems: "center", gap: 5,
+        }}
+      >
+        <motion.span
+          animate={{ opacity: backHover ? 1 : 0, x: backHover ? 0 : -5 }}
+          transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          style={{
+            fontFamily: "'DM Sans', sans-serif", fontSize: 10,
+            color: "var(--mm-gold)", lineHeight: 1,
+          }}
+        >
+          ←
+        </motion.span>
         <span style={{
           fontFamily: "'DM Sans', sans-serif", fontSize: 10,
           letterSpacing: "0.3em", color: "var(--mm-gold)", textTransform: "uppercase",
@@ -51,6 +73,7 @@ export function GalleryHeader({ couple, token, activeTab }) {
         {couple}
       </span>
 
+      {/* Tab switcher — instant within gallery context */}
       <nav style={{ display: "flex", gap: 0, flexShrink: 0 }}>
         {[
           { label: "Films",  path: `/g/${token}/films` },
@@ -58,7 +81,7 @@ export function GalleryHeader({ couple, token, activeTab }) {
         ].map(({ label, path }) => {
           const active = activeTab === label.toLowerCase();
           return (
-            <Link key={label} to={path} style={{ textDecoration: "none" }}>
+            <Link key={label} to={path} data-no-transition style={{ textDecoration: "none" }}>
               <span style={{
                 fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 600,
                 letterSpacing: "0.1em", textTransform: "uppercase",

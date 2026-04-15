@@ -54,6 +54,12 @@ export function PageTransitionProvider({ children }) {
   const phaseRef = useRef("idle");
   phaseRef.current = phase;
 
+  // ── Cinema transition state (for gallery entrances) ───────────────
+  const [cinemaData, setCinemaData] = useState(null); // { to, couple, type } | null
+  const triggerCinema = useCallback((to, couple, type) => {
+    setCinemaData({ to, couple, type });
+  }, []);
+
   const navigateTo = useCallback(
     (path, { replace = false } = {}) => {
       if (!path) return;
@@ -136,6 +142,9 @@ export function PageTransitionProvider({ children }) {
     finishCover,
     finishPlaying,
     finishReveal,
+    cinemaData,
+    triggerCinema,
+    clearCinema: useCallback(() => setCinemaData(null), []),
   };
 
   return (

@@ -251,6 +251,20 @@ function Testimonials() {
           </div>
         ))}
       </div>
+
+      <FadeIn>
+        <div style={{ textAlign: "center", marginTop: 48 }}>
+          <Link to="/testimonials" style={{
+            fontFamily: "'DM Sans'", fontSize: 14, color: DS.colors.gold,
+            padding: "16px 40px", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.1em",
+            fontWeight: 600, border: `1px solid ${DS.colors.gold}`, transition: "all 0.3s",
+            display: "inline-block",
+          }}
+            onMouseEnter={(e) => { e.target.style.background = DS.colors.gold; e.target.style.color = DS.colors.bg; }}
+            onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.color = DS.colors.gold; }}
+          >Read All Testimonials</Link>
+        </div>
+      </FadeIn>
     </div>
   );
 }

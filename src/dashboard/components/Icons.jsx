@@ -253,3 +253,44 @@ export const IconGallery = (p) => (
     <path d="M22 15l-5-5-4 4-2-2-4 4" />
   </svg>
 );
+
+export const IconToggleOn = (p) => (
+  <svg {...base} {...p}>
+    <rect x="1" y="7" width="22" height="10" rx="5" />
+    <circle cx="16" cy="12" r="3" fill="currentColor" />
+  </svg>
+);
+
+export const IconToggleOff = (p) => (
+  <svg {...base} {...p}>
+    <rect x="1" y="7" width="22" height="10" rx="5" />
+    <circle cx="8" cy="12" r="3" fill="currentColor" />
+  </svg>
+);
+
+export const IconArrowUp = (p) => (
+  <svg {...base} {...p}>
+    <path d="M18 15l-6-6-6 6" />
+  </svg>
+);
+
+export const IconArrowDown = (p) => (
+  <svg {...base} {...p}>
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+);
+
+export const IconCopy = (p) => (
+  <svg {...base} {...p}>
+    <rect x="9" y="9" width="13" height="13" rx="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+  </svg>
+);
+
+export const IconExternalLink = (p) => (
+  <svg {...base} {...p}>
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+    <path d="M15 3h6v6" />
+    <path d="M10 14L21 3" />
+  </svg>
+);

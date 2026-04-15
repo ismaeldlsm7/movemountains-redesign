@@ -42,8 +42,6 @@ export default function BookingWizard() {
   const [currentStep, setCurrentStep] = useState(1);
   const [direction, setDirection] = useState(1);
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [bookingData, setBookingData] = useState({
     weddingDate: null,
     selectedPackage: searchParams.get("package") || null,
@@ -80,14 +78,6 @@ export default function BookingWizard() {
     setDirection(-1);
     setCurrentStep((s) => Math.max(s - 1, 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleSubmit = () => {
-    setIsSubmitting(true);
-    // Mock: simulate Stripe checkout redirect
-    setTimeout(() => {
-      window.location.href = "/booking/confirmed";
-    }, 2000);
   };
 
   const canProceed = (() => {
@@ -192,8 +182,6 @@ export default function BookingWizard() {
             {currentStep === 6 && (
               <BookingReview
                 bookingData={bookingData}
-                onSubmit={handleSubmit}
-                isSubmitting={isSubmitting}
               />
             )}
           </motion.div>

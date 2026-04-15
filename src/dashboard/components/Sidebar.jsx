@@ -1,7 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { IconHome, IconBlog, IconHeart, IconUsers, IconPlug, IconSettings, IconClose, IconClipboard, IconBook, IconCalendar, IconDollar, IconUserCard, IconRing, IconGallery } from "./Icons";
+import { IconHome, IconBlog, IconHeart, IconUsers, IconPlug, IconSettings, IconClose, IconClipboard, IconBook, IconCalendar, IconDollar, IconUserCard, IconRing, IconGallery, IconLink } from "./Icons";
 
 const navGroups = [
+  {
+    title: "Studio",
+    items: [
+      { to: "/dashboard", label: "Overview", icon: IconHome, end: true },
+      { to: "/dashboard/blog",      label: "Blog",              icon: IconBlog },
+      { to: "/dashboard/weddings",  label: "Weddings",           icon: IconHeart },
+      { to: "/dashboard/galleries", label: "Gallery Deliveries", icon: IconGallery },
+    ],
+  },
   {
     title: "Business",
     items: [
@@ -12,12 +21,9 @@ const navGroups = [
     ],
   },
   {
-    title: "Studio",
+    title: "Marketing",
     items: [
-      { to: "/dashboard", label: "Overview", icon: IconHome, end: true },
-      { to: "/dashboard/blog",      label: "Blog",              icon: IconBlog },
-      { to: "/dashboard/weddings",  label: "Weddings",           icon: IconHeart },
-      { to: "/dashboard/galleries", label: "Gallery Deliveries", icon: IconGallery },
+      { to: "/dashboard/link-in-bio", label: "Link in Bio", icon: IconLink },
     ],
   },
   {

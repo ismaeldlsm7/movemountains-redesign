@@ -551,6 +551,7 @@
   .mm-dash__two-col { grid-template-columns: 1fr; }
 }
 
+
 /* ───── Data table ───── */
 .mm-dash__table-wrap {
   background: var(--dash-surface);
@@ -1624,5 +1625,283 @@
 
   .mm-dash__integ-status {
     margin-left: 0;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   RESPONSIVE — Large & ultra-wide screens
+   Fixes the dashboard layout for 27", 32" and high-DPI displays.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* ── 1440p / large laptops (≥ 1440px) ── */
+@media (min-width: 1440px) {
+  .mm-dash {
+    --dash-sidebar-w: 260px;
+  }
+
+  .mm-dash__content {
+    padding: 36px 52px 72px;
+  }
+
+  .mm-dash__topbar {
+    padding: 0 52px;
+  }
+}
+
+/* ── Full HD large monitors (≥ 1920px) ── */
+@media (min-width: 1920px) {
+  .mm-dash {
+    --dash-sidebar-w: 288px;
+    --dash-topbar-h: 72px;
+  }
+
+  .mm-dash__content {
+    padding: 48px 72px 96px;
+  }
+
+  .mm-dash__topbar {
+    padding: 0 72px;
+    height: var(--dash-topbar-h);
+  }
+
+  .mm-dash__topbar-title {
+    font-size: 22px;
+  }
+
+  .mm-dash__search {
+    width: 340px;
+  }
+
+  /* Cap metric cards at 4 columns — prevents stretching on wide content */
+  .mm-dash__metric-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .mm-dash__page-title {
+    font-size: 36px;
+  }
+
+  /* Give more room to the right column at wide widths */
+  .mm-dash__two-col {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+
+  .mm-dash__card {
+    padding: 28px 32px;
+  }
+}
+
+/* ── QHD / 4K / 5K — proporcional con el viewport (≥ 2560px) ──
+   Todos los valores son fracciones de la base de 1920px (X / 1920 * 100 = Xvw).
+   Sin max-width ni centrado — el layout llena la pantalla como una app nativa.
+   ─────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 2560px) {
+  .mm-dash {
+    /* Sidebar: 288px en 1920px → 15vw — misma proporción en cualquier pantalla */
+    --dash-sidebar-w: 15vw;
+    --dash-radius: 0.52vw;      /* 10px @ 1920px */
+    --dash-radius-sm: 0.31vw;   /* 6px @ 1920px */
+    /* Escala base de texto para elementos que usan font-size relativo */
+    font-size: 0.73vw;          /* 14px @ 1920px */
+  }
+
+  /* Sin cap ni centrado — el shell llena toda la pantalla */
+  .mm-dash__shell {
+    max-width: none;
+    margin: 0;
+  }
+
+  /* Sidebar interna: padding escala con el viewport */
+  .mm-dash__sidebar {
+    padding: 1.25vw 0.83vw;    /* 24px 16px @ 1920px */
+    gap: 1.67vw;               /* 32px @ 1920px */
+  }
+
+  /* Contenido sin max-width — llena el área disponible */
+  .mm-dash__content {
+    max-width: none;
+    padding: 2.5vw 3.75vw 5vw; /* 48px 72px 96px @ 1920px */
+  }
+
+  /* Top bar */
+  .mm-dash__topbar {
+    padding: 0 3.75vw;         /* 72px @ 1920px */
+    height: 3.75vw;            /* 72px @ 1920px */
+  }
+
+  .mm-dash__topbar-title {
+    font-size: 1.15vw;         /* 22px @ 1920px */
+  }
+
+  .mm-dash__search {
+    width: 17.7vw;             /* 340px @ 1920px */
+    font-size: 0.68vw;         /* 13px @ 1920px */
+  }
+
+  .mm-dash__search-icon {
+    width: 0.73vw;             /* 14px @ 1920px */
+    height: 0.73vw;
+  }
+
+  /* Encabezado de página */
+  .mm-dash__page-title {
+    font-size: 1.875vw;        /* 36px @ 1920px */
+  }
+
+  .mm-dash__page-subtitle {
+    font-size: 0.73vw;         /* 14px @ 1920px */
+  }
+
+  /* Marca / sidebar brand */
+  .mm-dash__brand {
+    font-size: 1.04vw;         /* 20px @ 1920px */
+    gap: 0.52vw;               /* 10px @ 1920px */
+    padding: 0 0.625vw;        /* 0 12px @ 1920px */
+  }
+
+  .mm-dash__brand-mark {
+    width: 1.77vw;             /* 34px @ 1920px */
+    height: 1.77vw;
+    font-size: 0.94vw;         /* 18px @ 1920px */
+    border-radius: 0.31vw;
+  }
+
+  .mm-dash__brand-sub {
+    font-size: 0.52vw;         /* 10px @ 1920px */
+    /* mark-width + gap + brand-padding = 1.77vw + 0.52vw + 0.625vw */
+    padding: 0 0.625vw 0 2.92vw;
+    letter-spacing: 0.22em;
+  }
+
+  /* Navegación */
+  .mm-dash__nav-group-title {
+    font-size: 0.52vw;         /* 10px @ 1920px */
+    padding: 0.83vw 0.625vw 0.42vw;
+  }
+
+  .mm-dash__nav-item {
+    font-size: 0.78vw;         /* 15px @ 1920px */
+    padding: 0.625vw 0.73vw;   /* 12px 14px @ 1920px */
+    gap: 0.625vw;
+    border-radius: var(--dash-radius-sm);
+  }
+
+  .mm-dash__nav-icon {
+    width: 0.94vw;             /* 18px @ 1920px */
+    height: 0.94vw;
+  }
+
+  /* Cards */
+  .mm-dash__card {
+    padding: 1.46vw 1.67vw;    /* 28px 32px @ 1920px */
+    border-radius: var(--dash-radius);
+  }
+
+  .mm-dash__card-title {
+    font-size: 0.83vw;         /* 16px @ 1920px */
+  }
+
+  .mm-dash__card-sub {
+    font-size: 0.625vw;        /* 12px @ 1920px */
+  }
+
+  /* Métricas */
+  .mm-dash__metric {
+    padding: 1.46vw 1.67vw;
+    border-radius: var(--dash-radius);
+  }
+
+  .mm-dash__metric-value {
+    font-size: 2.29vw;         /* 44px @ 1920px */
+  }
+
+  .mm-dash__metric-label {
+    font-size: 0.57vw;         /* 11px @ 1920px */
+  }
+
+  .mm-dash__metric-delta {
+    font-size: 0.625vw;        /* 12px @ 1920px */
+  }
+
+  .mm-dash__metric-hint {
+    font-size: 0.57vw;
+  }
+
+  /* Tabla */
+  .mm-dash__table {
+    font-size: 0.68vw;         /* 13px @ 1920px */
+  }
+
+  .mm-dash__table thead th {
+    padding: 0.73vw 1.04vw;
+    font-size: 0.57vw;
+  }
+
+  .mm-dash__table td {
+    padding: 0.83vw 1.04vw;
+  }
+
+  /* Botones */
+  .mm-dash__btn {
+    padding: 0.47vw 0.83vw;    /* 9px 16px @ 1920px */
+    font-size: 0.68vw;
+    gap: 0.42vw;
+    border-radius: var(--dash-radius-sm);
+  }
+
+  /* Feed de actividad */
+  .mm-dash__feed-body {
+    font-size: 0.68vw;         /* 13px @ 1920px */
+  }
+
+  .mm-dash__feed-time {
+    font-size: 0.57vw;
+  }
+
+  .mm-dash__feed-dot {
+    width: 0.42vw;
+    height: 0.42vw;
+    margin-top: 0.31vw;
+  }
+
+  /* Deadlines */
+  .mm-dash__deadline-title {
+    font-size: 0.68vw;
+  }
+
+  .mm-dash__deadline-meta {
+    font-size: 0.57vw;
+  }
+
+  .mm-dash__deadline-due {
+    font-size: 0.57vw;
+    padding: 0.21vw 0.42vw;
+  }
+
+  /* Inputs / Forms */
+  .mm-dash__input,
+  .mm-dash__textarea,
+  .mm-dash__select {
+    font-size: 0.73vw;
+    padding: 0.52vw 0.625vw;
+    border-radius: var(--dash-radius-sm);
+  }
+
+  .mm-dash__label {
+    font-size: 0.57vw;
+  }
+
+  /* Pills */
+  .mm-dash__pill {
+    font-size: 0.57vw;
+    padding: 0.21vw 0.52vw;
+    gap: 0.31vw;
+  }
+
+  /* Avatar */
+  .mm-dash__avatar {
+    width: 1.875vw;            /* 36px @ 1920px */
+    height: 1.875vw;
+    font-size: 0.73vw;
   }
 }

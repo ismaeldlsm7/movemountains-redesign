@@ -6,7 +6,9 @@ import "lenis/dist/lenis.css";
 import {
   PageTransitionProvider,
   DiaphragmTransition,
+  usePageTransition,
 } from "./components/PageTransition";
+import CinemaTransition from "./components/CinemaTransition";
 import Homepage from "./pages/movemountains-homepage";
 import Portfolio from "./pages/movemountains-portfolio";
 import About from "./pages/movemountains-about";
@@ -44,10 +46,12 @@ import WeddingCountdown from "./components/my-wedding/WeddingCountdown";
 import PreferredVendors from "./pages/movemountains-preferred-vendors";
 import BookingWizard from "./pages/movemountains-book";
 import BookingConfirmed from "./pages/movemountains-booking-confirmed";
+import Checkout from "./pages/movemountains-checkout";
 import GalleryEntry from "./pages/movemountains-gallery-entry";
 import GalleryFilms from "./pages/movemountains-gallery-films";
 import GalleryPhotos from "./pages/movemountains-gallery-photos";
 import NotFound from "./pages/movemountains-404";
+import LinkInBioPage from "./pages/movemountains-link-in-bio";
 
 // Dashboard is lazy-loaded so its bundle never ships with the public site.
 const DashboardLayout = lazy(() => import("./dashboard/DashboardLayout"));
@@ -66,11 +70,12 @@ const Clients = lazy(() => import("./dashboard/pages/Clients"));
 const DashboardCalendar = lazy(() => import("./dashboard/pages/Calendar"));
 const Galleries = lazy(() => import("./dashboard/pages/Galleries"));
 const GalleryEditor = lazy(() => import("./dashboard/pages/GalleryEditor"));
+const LinkInBioManager = lazy(() => import("./dashboard/pages/LinkInBio"));
 
 function SmoothScroll() {
   const { pathname } = useLocation();
   const lenisRef = useRef(null);
-  const isDashboard = pathname.startsWith("/dashboard") || pathname.startsWith("/g/");
+  const isDashboard = pathname.startsWith("/dashboard") || pathname.startsWith("/g/") || pathname === "/link";
 
   useEffect(() => {
     if (isDashboard) return;
@@ -127,12 +132,35 @@ function DashboardFallback() {
   );
 }
 
+/**
+ * Renders both the global diaphragm transition and the gallery cinema
+ * transition. Must be a child of PageTransitionProvider so it can read
+ * cinema state from the context.
+ */
+function AppTransitions() {
+  const { cinemaData, clearCinema } = usePageTransition();
+  return (
+    <>
+      <DiaphragmTransition />
+      {cinemaData && (
+        <CinemaTransition
+          isOpen
+          to={cinemaData.to}
+          couple={cinemaData.couple}
+          type={cinemaData.type}
+          onDone={clearCinema}
+        />
+      )}
+    </>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <PageTransitionProvider>
         <SmoothScroll />
-        <DiaphragmTransition />
+        <AppTransitions />
         <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/portfolio" element={<Portfolio />} />
@@ -167,11 +195,14 @@ export default function App() {
         <Route path="/intern" element={<Intern />} />
         <Route path="/rentals" element={<Rentals />} />
         <Route path="/book" element={<BookingWizard />} />
+        <Route path="/booking/checkout" element={<Checkout />} />
         <Route path="/booking/confirmed" element={<BookingConfirmed />} />
         <Route path="/portal" element={<Portal />} />
         <Route path="/my-wedding" element={<MyWedding />} />
         <Route path="/my-wedding/countdown" element={<WeddingCountdown />} />
         <Route path="/preferred-vendors" element={<PreferredVendors />} />
+        {/* ── Instagram Link in Bio — standalone branded page ── */}
+        <Route path="/link" element={<LinkInBioPage />} />
         {/* ── Private client delivery galleries — not linked from public nav ── */}
         <Route path="/g/:token" element={<GalleryEntry />} />
         <Route path="/g/:token/films" element={<GalleryFilms />} />
@@ -325,6 +356,14 @@ export default function App() {
             element={
               <Suspense fallback={null}>
                 <GalleryEditor />
+              </Suspense>
+            }
+          />
+          <Route
+            path="link-in-bio"
+            element={
+              <Suspense fallback={null}>
+                <LinkInBioManager />
               </Suspense>
             }
           />
